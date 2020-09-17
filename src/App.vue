@@ -2,7 +2,7 @@
   <div id="app">
     <el-container class="my-container">
       <el-header class="my-header">
-        <span style="color: aliceblue;font-size: x-large">组织部文件上传系统(Version-0.2)</span>
+        <span style="color: aliceblue;font-size: x-large">组织部文件上传系统(version 2.0)</span>
       </el-header>
       <el-container>
         <el-aside>
