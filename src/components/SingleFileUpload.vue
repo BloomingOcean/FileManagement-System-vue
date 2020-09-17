@@ -1,9 +1,10 @@
 <template>
   <div>
     <!-- :url="server_config.url+'/SingleFile'" -->
-    <uploader
+    <!-- <uploader v-model="period_value"
       browse_button="browse_button"
-      
+      :url="server_config.url+'/SingleFile'"
+      :multipart_params="syntheticUploadUrl"
       :multi_selection="false"
       :FilesAdded="filesAdded"
       :filters="{
@@ -14,7 +15,7 @@
           max_file_size : '102400kb'
         }"
       @inputUploader="inputUploader"
-    />
+    /> -->
     <div id="main-body">
       <div id="war-text" style="margin-bottom: 10px;">
         <el-tag type="warning">注：2018届的为大三，2019届的为大二</el-tag>
@@ -53,7 +54,7 @@
           </el-option>
         </el-select>
       </div>
-      <div class="choise-file">
+      <!-- <div class="choise-file">
         <el-button id="browse_button" type="primary">选择文件</el-button>
         <span v-for="file in files" :key="file.name">{{file.name}}</span>
         <br />
@@ -61,7 +62,22 @@
       <div class="start-load">
         <el-button type="danger" @click="uploadStart()">开始上传</el-button>
         <br />
-      </div>
+      </div> -->
+      <!-- 文件上传拖拽框 -->
+      <el-upload
+        class="upload-demo"
+        drag
+        show-file-list
+        accept=".zip,.7z,.rar"
+        :beforeRemove="onBeforeRemove"
+        :before-upload="onBeforeUpload"
+        :action="syntheticUploadUrl()"
+
+        multiple>
+        <i class="el-icon-upload"></i>
+        <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        <!-- <div class="el-upload__tip" slot="tip">只能上传zip/7z/rar文件，且不超过100M</div> -->
+      </el-upload>
 
       <el-dialog title="正在上传" :visible.sync="dialogTableVisible">
         <el-progress
@@ -71,8 +87,6 @@
           :percentage="files[0].percent"
         ></el-progress>
       </el-dialog>
-      <br />
-      <br />
       <div id="war-text">
         <el-tag type="warning">只允许上传ZIP，RAR，7Z文件, 最大只能上传100M的文件</el-tag>
       </div>
@@ -102,6 +116,13 @@ export default {
       dialogTableVisible: false,
       //文件重传显示
       dialogVisible: false,
+      //文件上传的参数
+      upload_parameter: {
+        fileId: this.period_value,
+        gradeL: this.grade_value,
+        major: this.major,
+        sequence: this.class_value
+      },
       //期数数组
       options_period: [
         {
@@ -170,6 +191,34 @@ export default {
       this.up = up;
       this.files = up.files;
     },
+    //上传文件之间的判断操作
+    onBeforeUpload(file)
+    {
+      const isIMAGE = file.type === 'zip'||'7z'||'rar';
+      const isLt1M = file.size / 1024 / 1024 < 100;
+
+      if (!isIMAGE) {
+        this.$message.error('上传文件只能是zip、7z、rar格式!');
+      }
+      if (!isLt1M) {
+        this.$message.error('上传文件大小不能超过 100MB!');
+      }
+      return isIMAGE && isLt1M;
+    },
+    //删除文件之前的确认
+    onBeforeRemove(file){
+      // return this.$confirm(确定移除 ${file.name} ？)
+    },
+    //合成需要的url
+    syntheticUploadUrl(){
+      var url = this.global.server_config.url + "/SingleFile" 
+                  + "?fileId=" + this.$data.period_value
+                  + "&grade=" + this.$data.grade_value
+                  + "&major=" + this.$data.major_value
+                  + "&sequence=" + this.$data.class_value
+      // console.log(url)
+      return url;
+    },
     //上传文件
     uploadStart() {
       var than = this;
@@ -210,6 +259,16 @@ export default {
           }
           console.log(res.data)
         });
+
+
+
+
+
+
+
+
+
+
 
       this.dialogTableVisible = true;
       this.up.start();

@@ -252,6 +252,8 @@
           browse_button: this.browse_button,
           container: this.container,
           url: this.url,
+          //添加属性
+          multipart_params: this.multipart_params,
           chunk_size: this.chunk_size,
           headers: this.headers,
           multipart: this.multipart,
