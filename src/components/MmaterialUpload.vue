@@ -3,7 +3,7 @@
     <div id="main-body">
 
       <div id="war-text" style="margin-bottom: 10px;">
-        <el-tag type="warning">注：2018届的为大三，2019届的为大二</el-tag>
+        <el-tag type="warning">2018届的为大三，2019届的为大二</el-tag>
       </div>
 
       <div class="info-option">
@@ -92,7 +92,7 @@ import Uploader from "./Uploader";
 import axios from "axios";
 import GlobalVue from '../Global.vue';
 export default {
-  name: "SingleFileUpload",
+  name: "MmaterialUpload",
   data() {
     return {
       server_config: this.global.server_config,

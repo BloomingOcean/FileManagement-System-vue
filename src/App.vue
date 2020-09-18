@@ -7,11 +7,19 @@
       <el-container>
         <el-aside>
           <el-menu :default-active="defaultActive" style="height: 100%">
-            <el-menu-item index="singleFileUpload" @click="redirectUrl('/singleFileUpload')">
+            <el-menu-item index="YouthLearningUpload" @click="redirectUrl('/YouthLearningUpload')">
               <i class="el-icon-menu"></i>
-              <span slot="title">单文件上传</span>
+              <span slot="title">青年大学习</span>
             </el-menu-item>
-            <el-menu-item index="multiFileUpload" @click="redirectUrl('/multiFileUpload')">
+            <el-menu-item index="MmaterialUpload" @click="MmaterialUpload()">
+              <i class="el-icon-menu"></i>
+              <span slot="title">资料</span>
+            </el-menu-item>
+            <el-menu-item index="FileUploadSituation" @click="FileUploadSituation()">
+              <i class="el-icon-menu"></i>
+              <span slot="title">文件上交情况</span>
+            </el-menu-item>
+            <!-- <el-menu-item index="multiFileUpload" @click="redirectUrl('/multiFileUpload')">
               <i class="el-icon-date"></i>
               <span slot="title">多文件上传</span>
             </el-menu-item>
@@ -30,7 +38,7 @@
             <el-menu-item index="pictureUpload" @click="redirectUrl('/pictureUpload')">
               <i class="el-icon-picture"></i>
               <span slot="title">图片上传</span>
-            </el-menu-item>
+            </el-menu-item> -->
           </el-menu>
         </el-aside>
         <el-main class="my-main">
@@ -52,6 +60,16 @@
     methods: {
       redirectUrl(val){
         this.$router.push(val);
+      },
+      MmaterialUpload(){
+        this.$alert('此功能暂未开放，敬请期待', '提示', {
+          confirmButtonText: '确定',
+          });
+      },
+      FileUploadSituation(){
+        this.$alert('无管理员权限，禁止访问', '提示', {
+          confirmButtonText: '确定',
+        });
       }
     }
   }
