@@ -69,7 +69,6 @@
 </template>
 
 <script>
-// import Uploader from "./Uploader";
 import axios from "axios";
 import GlobalVue from '../Global.vue';
 export default {
@@ -303,9 +302,6 @@ export default {
     //多选框选择班级
     choise_class() {},
   },
-  // components: {
-  //   uploader: Uploader,
-  // },
 };
 </script>
 

@@ -3,7 +3,7 @@
     <div id="main-body">
 
       <div id="war-text" style="margin-bottom: 10px;">
-        <el-tag type="warning">注：2018届的为大三，2019届的为大二</el-tag>
+        <el-tag type="warning">注：大一为2020届，大二为2019届，大三为2018届</el-tag>
       </div>
 
       <div class="info-option">
@@ -61,7 +61,7 @@
 
       <br />
       <div id="war-text">
-        <el-tag type="warning">只允许上传ZIP，RAR，7Z文件、每次只能上传一个文件、最大只能上传100M的文件</el-tag>
+        <el-tag type="warning">只允许上传ZIP，RAR，7Z文件、每次只能上传一个文件、最大只能上传200M的文件</el-tag>
       </div>
 
     </div>
@@ -144,7 +144,7 @@ export default {
       const extension = testmsg === 'zip'
       const extension2 = testmsg === '7z'
       const extension3 = testmsg === 'rar'
-      const isLt100M = file.size / 1024 / 1024 < 100
+      const isLt200M = file.size / 1024 / 1024 < 200
       // 判断班级信息是否填入完整
       if (
         this.period_value == "" ||
@@ -164,8 +164,8 @@ export default {
         return false;
       }
       // 判断大小正确
-      if (!isLt100M) {
-        this.$message.error('上传文件大小不能超过 100MB!');
+      if (!isLt200M) {
+        this.$message.error('上传文件大小不能超过 200MB!');
         return false;
       }
     },

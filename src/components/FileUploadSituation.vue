@@ -28,14 +28,16 @@
         highlight-current-row
         style="width: 100%">
         <el-table-column
+          align="center"
           prop="majorName"
           label="专业"
-          width="180">
+          width="550">
         </el-table-column>
         <el-table-column
+          align="center"
           prop="classSequence"
           label="班级"
-          width="180">
+          width="550">
         </el-table-column>
       </el-table>
   </div>
